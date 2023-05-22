@@ -6,10 +6,12 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <>
-    <Route path='/' element={<App/>}></Route>
-    <Route path='/contacts' element={<div>contacts</div>}/>
-    </>
+    
+    <Route path='/' element={<Layout/>}>
+
+      <Route path='/contacts/:contactId' element={<div>contacts</div>}/>
+    </Route>
+  
   )
 )
 

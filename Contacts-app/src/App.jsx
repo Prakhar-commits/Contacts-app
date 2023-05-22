@@ -8,8 +8,18 @@ function App() {
   const [count, setCount] = useState(0);
 
 
+function Layout(){
 
-  return <h1>Contacts app</h1>
+}
+  return (
+    <>
+    <main>
+      <aside></aside>
+      <section>comment</section>
+    </main>
+    </>
+  )
+
 }
 
 export default App;
