@@ -4,6 +4,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import { css } from "@emotion/react";
 import { Outlet } from "react-router-dom";
+import ContactsList from "./ContactsList";
 
 function Sidenav() {
   return (
@@ -22,17 +23,21 @@ function Sidenav() {
       <button>Search</button>
      </form>
       </header>
+      
       <section css={css`
-      padding:16px;`}>list of contacts</section>
+      padding:16px;`}>
+        <ContactsList/>
+      </section>
       <footer css={css`
-      border-top: 1px solid
-      padding: 16px`}>Footer</footer>
+      border-top: 1px solid;
+      padding: 16px;`}>Footer</footer>
     </aside>
   );
 }
   
 function Contents() {
   return (
+
     <section>
       <Outlet />
     </section>
