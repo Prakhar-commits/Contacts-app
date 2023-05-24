@@ -25,7 +25,9 @@ function Sidenav() {
       </header>
       
       <section css={css`
-      padding:16px;`}>
+      padding:16px;
+      max-height: 500px:
+      overflow: auto;`}>
         <ContactsList/>
       </section>
       <footer css={css`
