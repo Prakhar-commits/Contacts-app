@@ -6,6 +6,28 @@ import { css } from "@emotion/react";
 import { Outlet } from "react-router-dom";
 import ContactsList from "./ContactsList";
 
+function Header({onSearchChange}){
+
+const [searchtext , setSearchText] = useState();
+function handleChange(e){
+const {value} = e.target;
+setSearchText(value);
+onSearchChange(value);
+}
+  return (
+  <header css={css`
+  border-bottom: 1px solid;
+  padding: 16px;`}>
+ <form css={css`
+ display: flex;
+ justify-content: space-between;`}>
+  <input type="text" value={searchtext} onChange={handleChange} />
+  <button>Search</button>
+ </form>
+  </header>
+)}
+
+
 function Sidenav() {
   return (
     <aside css={css`
@@ -13,17 +35,8 @@ function Sidenav() {
     display: grid;
     grid-template-rows: auto 1fr auto;`
     }>
-      <header css={css`
-      border-bottom: 1px solid;
-      padding: 16px;`}>
-     <form css={css`
-     display: flex;
-     justify-content: space-between;`}>
-      <input type="text" />
-      <button>Search</button>
-     </form>
-      </header>
-      
+     
+      <Header/>
       <section css={css`
       padding:16px;
       max-height: 500px:
