@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom/client'
 import {Layout} from './App.jsx'
 import './index.css'
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
-import { loadContacts } from './loaders.js'
+import { loadContacts , loadContact } from './loaders.js'
+import Contact from './Contact.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout/>} loader={loadContacts}>
-      <Route path="/contacts/:contactId" element={<div>contacts</div>}/>
+      <Route path="/contacts/:contactId" loader={({params})=> loadContact(params.contactId)} element={<Contact/>}/>
     </Route>
   )
 );
