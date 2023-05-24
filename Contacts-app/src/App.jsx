@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -6,29 +6,39 @@ import { css } from "@emotion/react";
 import { Outlet } from "react-router-dom";
 import ContactsList from "./ContactsList";
 
-function Header({onSearchChange}){
+function Header({onSearch}){
 
-const [searchtext , setSearchText] = useState();
-function handleChange(e){
-const {value} = e.target;
-setSearchText(value);
-onSearchChange(value);
+function Submit(e){
+  e.preventDefault();
+  onSearch(searchElemetnRef.current.value);
 }
+
+const searchElemetnRef = useRef(null);
+
   return (
   <header css={css`
   border-bottom: 1px solid;
   padding: 16px;`}>
  <form css={css`
  display: flex;
- justify-content: space-between;`}>
-  <input type="text" value={searchtext} onChange={handleChange} />
-  <button>Search</button>
+ justify-content: space-between;`}
+ onSubmit={Submit}>
+  <input ref={searchElemetnRef} css={css({
+    padding:"16px",
+
+  })} type="text" />
+  <button >Search</button>
  </form>
   </header>
 )}
 
 
 function Sidenav() {
+  const [searchtext , setSearchText] = useState("");
+  function onSearch(text){
+    setSearchText(text);
+  }
+
   return (
     <aside css={css`
     border-right: 1px solid;
@@ -36,12 +46,12 @@ function Sidenav() {
     grid-template-rows: auto 1fr auto;`
     }>
      
-      <Header/>
+      <Header onSearch={onSearch}/>
       <section css={css`
       padding:16px;
       max-height: 500px:
       overflow: auto;`}>
-        <ContactsList/>
+        <ContactsList searchtext={searchtext}/>
       </section>
       <footer css={css`
       border-top: 1px solid;

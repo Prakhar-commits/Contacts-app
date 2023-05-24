@@ -2,15 +2,19 @@ import { css } from '@emotion/react';
 import React from 'react'
 import { NavLink, useLoaderData } from 'react-router-dom'
 
-export default function ContactsList() {
-  const  contacts = useLoaderData();
+export default function ContactsList({searchtext}) {
+  const  contacts = useLoaderData()?? [];
+  const filteredContacts = contacts.filter(contact => {
+    const {first ,last }= contact.name;
+    return first.toLowerCase().includes(searchtext.toLowerCase()) || last.toLowerCase().includes(searchtext.toLowerCase());
+    })
   console.log(contacts);
   return (
   <ul css={css`
   list-style: none;
   padding: 0;`}>
-      {contacts?.length
-      ? contacts.map((contact) => {
+      {filteredContacts?.length
+      ? filteredContacts.map((contact) => {
       const {
         id: {value},
         name: {first , last} ,
